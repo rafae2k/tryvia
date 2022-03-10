@@ -1,14 +1,22 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchGravatar } from '../../redux/actions/playerActions';
 import { Container } from './styles';
 
-export class Header extends Component {
+class Header extends Component {
+  componentDidMount() {
+    console.log(this.props);
+    const { getGravatar } = this.props;
+    console.log(getGravatar());
+  }
+
   render() {
-    const { avatar, playerName, score } = this.props;
+    const { playerName, score, getGravatar } = this.props;
     return (
       <Container>
         <img
-          src={ avatar }
+          src=''
           alt="Player Avatar"
           data-testid="header-profile-picture"
         />
@@ -23,10 +31,15 @@ export class Header extends Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => ({
+  getGravatar: (gravatarEmail) => dispatch(fetchGravatar(gravatarEmail)),
+});
+
 Header.propTypes = {
+  getGravatar: PropTypes.func,
   avatar: PropTypes.string,
   playerName: PropTypes.string,
   score: PropTypes.number,
 }.isRequired;
 
-export default index;
+export default connect(null, mapDispatchToProps)(Header);
