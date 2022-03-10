@@ -7,18 +7,20 @@ class Login extends Component {
   state ={
     name: '',
     email: '',
-    isEnable: false,
+    isDisabled: true,
   }
 
   validateForm = () => {
     const { email, name } = this.state;
 
     const regexEmail = new RegExp(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/);
-    const validateEmail = regexEmail.test(String(email).toLowerCase);
+    const isEmailValid = regexEmail.test(String(email).toLowerCase());
 
-    return (validateEmail && name.length > 0)
-      ? this.setState({ isEnable: true })
-      : this.setState({ isEnable: false });
+    if (isEmailValid && name.length > 0) {
+      this.setState({ isDisabled: false });
+    } else {
+      this.setState({ isDisabled: true });
+    }
   }
 
   handleChange = ({ target: { value, name } }) => {
@@ -33,7 +35,7 @@ class Login extends Component {
   }
 
   render() {
-    const { name, email, isEnable } = this.state;
+    const { name, email, isDisabled } = this.state;
     return (
       <div>
         <form onSubmit={ this.handleSubmit }>
@@ -53,8 +55,9 @@ class Login extends Component {
             value={ email }
           />
           <button
+            data-testid="btn-play"
             type="submit"
-            disabled={ isEnable }
+            disabled={ isDisabled }
           >
             Play
           </button>
