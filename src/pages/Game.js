@@ -12,3 +12,5 @@ class Game extends Component {
 Game.propTypes = { };
 
 export default Game;
+
+//game...
