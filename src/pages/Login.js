@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addPlayer } from '../redux/actions/playerActions';
+import { fetchToken } from '../redux/actions/tokenActions';
 
 class Login extends Component {
   state ={
@@ -27,11 +28,15 @@ class Login extends Component {
     this.setState({ [name]: value }, this.validateForm);
   }
 
-  handleSubmit = () => {
-    const { createUserDispatch } = this.props;
+  handleSubmit = async (e) => {
+    e.preventDefault();
+    const { createUser, history, getToken } = this.props;
     const { email, name } = this.state;
 
-    createUserDispatch({ email, name });
+    await createUser({ gravatarEmail: email, name });
+    await getToken();
+
+    history.push('/game');
   }
 
   render() {
@@ -69,7 +74,8 @@ class Login extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  createUserDispatch: (user) => dispatch(addPlayer(user)),
+  createUser: (user) => dispatch(addPlayer(user)),
+  getToken: () => dispatch(fetchToken()),
 });
 
 export default connect(null, mapDispatchToProps)(Login);
