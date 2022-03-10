@@ -1,4 +1,4 @@
-import { ADD_PLAYER, SET_SCORE } from '../actions';
+import { ADD_PLAYER, SET_SCORE } from '../actions/playerActions';
 
 const PLAYER_INITIAL_STATE = {
   name: '',
