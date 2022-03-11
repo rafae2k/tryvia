@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addPlayer } from '../redux/actions/playerActions';
-import { setTriviaToken } from '../redux/actions/tokenActions';
-import { saveTokenOnLocalStorage } from '../services/localStorage.service';
-import fetchTriviaToken from '../utils/fetchTriviaToken';
+import { addPlayer } from '../../redux/actions/playerActions';
+import { setTriviaToken } from '../../redux/actions/tokenActions';
+import { saveTokenOnLocalStorage } from '../../services/localStorage.service';
+import fetchTriviaToken from '../../utils/fetchTriviaToken';
 
 class Login extends Component {
   state ={
