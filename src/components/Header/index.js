@@ -2,31 +2,17 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import fetchGravatar from '../../services/fetchGravatar.service';
+import getGravatar from '../../utils/fetchGravatar';
 
 import { Container } from './styles';
 
 class Header extends Component {
-  state = {
-    gravatarImage: '',
-  }
-
-  async componentDidMount() {
-    const { name, gravatarEmail, score } = this.props;
-    const gravatar = await fetchGravatar(gravatarEmail);
-    this.setState(
-      (prevState) => (
-        { ...prevState, name, gravatarEmail, score, gravatarImage: gravatar }
-      ),
-    );
-  }
-
   render() {
-    const { name, score, gravatarImage } = this.state;
+    const { name, score, gravatarEmail } = this.props;
     return (
       <Container>
         <img
-          src={ gravatarImage }
+          src={ getGravatar(gravatarEmail) }
           alt="Player Avatar"
           data-testid="header-profile-picture"
         />
@@ -48,10 +34,6 @@ const mapStateToProps = ({ player: { gravatarEmail, name, score, assertions } })
   assertions,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  getGravatar: (gravatarEmail) => dispatch(fetchGravatar(gravatarEmail)),
-});
-
 Header.propTypes = {
   getGravatar: PropTypes.func,
   avatar: PropTypes.string,
@@ -59,4 +41,4 @@ Header.propTypes = {
   score: PropTypes.number,
 }.isRequired;
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, null)(Header);
