@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import decodeHtml from '../../utils/decodeHtml';
+// import decodeHtml from '../../utils/decodeHtml';
 import shuffleQuestions from '../../utils/shuffleQuestions';
 
 class QuestionCard extends Component {
@@ -10,7 +10,7 @@ class QuestionCard extends Component {
       category,
       correct_answer: correctAnswer,
       incorrect_answers: incorrectAnswers,
-      difficulty,
+      // difficulty,
       question,
       type,
     } = questions[questionsIndex];
