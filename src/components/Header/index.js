@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import getGravatar from '../../utils/fetchGravatar';
+import getGravatar from '../../utils/getGravatar';
 
 import { Container } from './styles';
 
