@@ -11,7 +11,7 @@ class Game extends Component {
   }
 
   render() {
-    const { questions } = this.props;
+    // const { questions } = this.props;
     return (
       <>
         <Header />
