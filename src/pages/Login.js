@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addPlayer } from '../redux/actions/playerActions';
-import { fetchToken } from '../redux/actions/tokenActions';
+import { setTriviaToken } from '../redux/actions/tokenActions';
+import { saveTokenOnLocalStorage } from '../services/localStorage.service';
+import fetchTriviaToken from '../utils/fetchTriviaToken';
 
 class Login extends Component {
   state ={
@@ -30,11 +32,14 @@ class Login extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    const { createUser, history, getToken } = this.props;
+    const { createUserDispatch, history, triviaTokenDispatch } = this.props;
     const { email, name } = this.state;
 
-    await createUser({ gravatarEmail: email, name });
-    await getToken();
+    await createUserDispatch({ gravatarEmail: email, name });
+
+    const token = await fetchTriviaToken();
+    await saveTokenOnLocalStorage(token);
+    triviaTokenDispatch(token);
 
     history.push('/game');
   }
@@ -74,8 +79,8 @@ class Login extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  createUser: (user) => dispatch(addPlayer(user)),
-  getToken: () => dispatch(fetchToken()),
+  createUserDispatch: (user) => dispatch(addPlayer(user)),
+  triviaTokenDispatch: (token) => dispatch(setTriviaToken(token)),
 });
 
 export default connect(null, mapDispatchToProps)(Login);
