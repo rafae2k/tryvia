@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
+import Timer from '../Timer';
 
 // Styles
 import { QuestionContainer, AnswersContainer, Button } from './styles';
@@ -85,6 +86,7 @@ const QuestionCard = ({
               />
             )
         ))}
+        <Timer />
       </AnswersContainer>
     </QuestionContainer>
   );
