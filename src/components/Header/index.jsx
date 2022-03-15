@@ -16,12 +16,20 @@ class Header extends Component {
           alt="Player Avatar"
           data-testid="header-profile-picture"
         />
-        <p data-testid="header-player-name">
-          { name }
-        </p>
-        <p data-testid="header-score">
-          { score }
-        </p>
+        <div>
+          <p>
+            Player:
+            <span data-testid="header-player-name">
+              { name }
+            </span>
+          </p>
+          <p>
+            Score:
+            <span data-testid="header-score">
+              { score }
+            </span>
+          </p>
+        </div>
       </Container>
     );
   }

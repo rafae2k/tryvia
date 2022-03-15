@@ -5,7 +5,10 @@ import { Header } from '../../components/Header';
 export class Feedback extends Component {
   render() {
     return (
-      <Header />
+      <>
+        <Header />
+        <h1 data-testid="feedback-text">Olá</h1>
+      </>
     );
   }
 }
