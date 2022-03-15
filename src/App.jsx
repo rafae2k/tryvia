@@ -4,6 +4,8 @@ import { Switch, Route } from 'react-router-dom';
 import Login from './pages/Login';
 import Game from './pages/Game';
 import Configurations from './pages/Configurations';
+import Feedback from './pages/Feedback';
+import Ranking from './pages/Ranking';
 
 import './App.css';
 // import logo from './trivia.png';
@@ -18,6 +20,8 @@ export default function App() {
         <Route exact path="/" component={ Login } />
         <Route path="/Game" component={ Game } />
         <Route path="/Configurations" component={ Configurations } />
+        <Route path="/feedback" component={ Feedback } />
+        <Route path="/ranking" component={ Ranking } />
       </Switch>
     </div>
   );
