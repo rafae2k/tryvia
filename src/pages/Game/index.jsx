@@ -26,7 +26,7 @@ class Game extends Component {
 
   handleUserAnswer = (e) => {
     const { questions, setUserScore, player } = this.props;
-    const { questionNumber, userClicked } = this.state;
+    const { questionNumber } = this.state;
 
     // get user answer
     const userAnswer = e.currentTarget.value;

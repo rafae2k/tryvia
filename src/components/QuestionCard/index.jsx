@@ -9,7 +9,6 @@ const QuestionCard = ({
   question: triviaQuestion,
   handleUserAnswer,
   isAnswersDisabled,
-  userAnswer,
   userClicked,
 }) => {
   const {
@@ -18,7 +17,7 @@ const QuestionCard = ({
     incorrect_answers: incorrectAnswers,
     // difficulty,
     question,
-    type,
+    // type,
   } = triviaQuestion;
 
   const styles = {
