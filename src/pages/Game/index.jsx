@@ -22,8 +22,6 @@ class Game extends Component {
   componentDidMount() {
     const { getQuestions } = this.props;
     getQuestions();
-    const ONE_SECOND_IN_MILLISECONDS = 1000;
-    setInterval(this.decrease, ONE_SECOND_IN_MILLISECONDS);
   }
 
   handleUserAnswer = (e) => {
