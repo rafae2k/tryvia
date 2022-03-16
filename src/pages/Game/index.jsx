@@ -17,7 +17,6 @@ class Game extends Component {
     showNextQuestion: false,
     userAnswer: undefined,
     userClicked: false,
-    timer: 30,
   }
 
   componentDidMount() {
@@ -59,15 +58,8 @@ class Game extends Component {
       questionNumber: prevState.questionNumber + 1,
       isAnswersDisabled: false,
       userClicked: false,
-      timer: 30,
     }));
   };
-
-  decrease = () => {
-    const { timer } = this.state;
-    if (timer === 0) this.setState({ timer: 0, isAnswersDisabled: true });
-    if (timer !== 0) this.setState({ timer: timer - 1 });
-  }
 
   render() {
     const { questions } = this.props;
