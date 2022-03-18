@@ -102,24 +102,38 @@ function Timer({
   // getTimeLeft,
   isTimerEnabled,
   setTimeOver,
+  resetTimer,
+  setResetTimer,
 }) {
   const TIMER_TIME_IN_SECONDS = 30;
   const TIMER_STEP_IN_MILLISECONDS = 1000;
 
   const [timer, setTimer] = useState(TIMER_TIME_IN_SECONDS);
 
+  console.log(timer);
+
   useEffect(() => {
+    function clear(id) {
+      if (resetTimer) clearTimeout(id);
+    }
+
     if (isTimerEnabled && timer > 0) {
-      setTimeout(() => {
+      const timeOutId = setTimeout(() => {
         setTimer(timer - 1);
       }, TIMER_STEP_IN_MILLISECONDS);
+      clear(timeOutId);
     }
 
     if (timer === 0) {
       setTimeOver();
     }
+
+    if (resetTimer) {
+      setTimer(TIMER_TIME_IN_SECONDS);
+      setResetTimer();
+    }
     // getTimeLeft(timer);
-  }, [timer, isTimerEnabled]);
+  }, [timer, isTimerEnabled, resetTimer]);
 
   return (
     <section>

@@ -19,6 +19,7 @@ class Game extends Component {
     userAnswer: undefined,
     userClicked: false,
     isTimerEnabled: false,
+    resetTimer: false,
   }
 
   componentDidMount() {
@@ -38,7 +39,10 @@ class Game extends Component {
 
     if (userAnswer === correctAnswer) {
       this.setState({ userAnswer, userClicked: true });
-      setUserScore(player.score + 1);
+      setUserScore({
+        assertions: player.assertions + 1,
+        score: player.score + 1,
+      });
     }
 
     this.setState({
@@ -59,9 +63,14 @@ class Game extends Component {
       questionNumber: prevState.questionNumber + 1,
       isAnswersDisabled: false,
       userClicked: false,
-      initiateTimer: true,
+      resetTimer: true,
+      isTimerEnabled: true,
     }));
   };
+
+  setResetTimer = () => {
+    this.setState((prevState) => ({ ...prevState, resetTimer: false }));
+  }
 
   startTimer = () => {
     this.setState((prevState) => ({ ...prevState, isTimerEnabled: true }));
@@ -90,6 +99,7 @@ class Game extends Component {
       userAnswer,
       userClicked,
       isTimerEnabled,
+      resetTimer,
     } = this.state;
 
     return (
@@ -99,6 +109,8 @@ class Game extends Component {
           getTimeLeft={ this.getTimeLeft }
           isTimerEnabled={ isTimerEnabled }
           setTimeOver={ this.setTimeOver }
+          resetTimer={ resetTimer }
+          setResetTimer={ this.setResetTimer }
         />
         { (questions.length > 0)
         && (<QuestionCard
