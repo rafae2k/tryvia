@@ -98,7 +98,7 @@ class Game extends Component {
         <Timer
           getTimeLeft={ this.getTimeLeft }
           isTimerEnabled={ isTimerEnabled }
-          setTimeOver={this.setTimeOver}
+          setTimeOver={ this.setTimeOver }
         />
         { (questions.length > 0)
         && (<QuestionCard

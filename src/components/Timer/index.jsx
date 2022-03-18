@@ -95,9 +95,14 @@
 
 // export default Timer;
 
+import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 
-function Timer({ getTimeLeft, isTimerEnabled, setTimeOver }) {
+function Timer({
+  // getTimeLeft,
+  isTimerEnabled,
+  setTimeOver,
+}) {
   const TIMER_TIME_IN_SECONDS = 30;
   const TIMER_STEP_IN_MILLISECONDS = 1000;
 
@@ -124,5 +129,9 @@ function Timer({ getTimeLeft, isTimerEnabled, setTimeOver }) {
     </section>
   );
 }
+
+Timer.propTypes = {
+  getTimeLeft: PropTypes.func,
+}.isRequired;
 
 export default Timer;

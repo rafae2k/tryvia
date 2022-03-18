@@ -12,7 +12,6 @@ const QuestionCard = ({
   userClicked,
   startTimer,
 }) => {
-
   useEffect(() => {
     startTimer();
   }, []);
