@@ -1,13 +1,23 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 
+// Redux
+import { connect } from 'react-redux';
+import { setScore } from '../../redux/actions/playerActions';
+
+// Styles
 import Header from '../../components/Header';
 
 class Feedback extends Component {
   handleClickPlayAgain = (e) => {
-    const { history } = this.props;
+    const { history, setUserScore } = this.props;
     e.preventDefault();
+
+    setUserScore({
+      assertions: 0,
+      score: 0,
+    });
+
     return history.push('/');
   }
 
@@ -25,7 +35,7 @@ class Feedback extends Component {
         <Header />
         { (assertions < MIN_ASSERTIONS)
           ? <h1 data-testid="feedback-text">Could be better...</h1>
-          : <h1 data-testid="feedback-text">Well Done</h1>}
+          : <h1 data-testid="feedback-text">Well Done!</h1>}
         <h2 data-testid="feedback-total-question">
           {`Você acertou ${assertions} questões!`}
         </h2>
@@ -56,9 +66,13 @@ const mapStateToProps = ({ player: { score, assertions } }) => ({
   assertions,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  setUserScore: (score) => dispatch(setScore(score)),
+});
+
 Feedback.propTypes = {
   score: PropTypes.number,
   assertions: PropTypes.number,
 }.isRequired;
 
-export default connect(mapStateToProps, null)(Feedback);
+export default connect(mapStateToProps, mapDispatchToProps)(Feedback);
