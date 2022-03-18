@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
-import Timer from '../Timer';
 
 // Styles
 import { QuestionContainer, AnswersContainer, Button } from './styles';
@@ -11,7 +10,13 @@ const QuestionCard = ({
   handleUserAnswer,
   isAnswersDisabled,
   userClicked,
+  startTimer,
 }) => {
+
+  useEffect(() => {
+    startTimer();
+  }, []);
+
   const {
     category,
     correct_answer: correctAnswer,
@@ -86,7 +91,6 @@ const QuestionCard = ({
               />
             )
         ))}
-        <Timer />
       </AnswersContainer>
     </QuestionContainer>
   );
