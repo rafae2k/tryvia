@@ -94,51 +94,35 @@
 // }
 
 // export default Timer;
-import React from 'react';
 
-class Timer extends React.Component {
-  state = {
+import React, { useEffect, useState } from 'react';
 
-    counter: 30,
-    isAnswersDisabled: false,
+function Timer({ getTimeLeft, isTimerEnabled, setTimeOver }) {
+  const TIMER_TIME_IN_SECONDS = 30;
+  const TIMER_STEP_IN_MILLISECONDS = 1000;
 
-  }
+  const [timer, setTimer] = useState(TIMER_TIME_IN_SECONDS);
 
-  componentDidMount() {
-    this.tick();
-  }
+  useEffect(() => {
+    if (isTimerEnabled && timer > 0) {
+      setTimeout(() => {
+        setTimer(timer - 1);
+      }, TIMER_STEP_IN_MILLISECONDS);
+    }
 
-  tick = () => {
-    const { isAnswersDisabled, counter } = this.state;
-    const ONE_SECOND = 1000;
+    if (timer === 0) {
+      setTimeOver();
+    }
+    // getTimeLeft(timer);
+  }, [timer, isTimerEnabled]);
 
-    const intervalTime = () => {
-      if (isAnswersDisabled === false && counter > 0) {
-        this.setState((prevState) => ({
-          counter: prevState.counter - 1,
-        }));
-      }
-    };
-
-    setInterval(intervalTime, ONE_SECOND);
-
-    const TIME_LIMIT = 30000;
-    setTimeout(() => {
-      this.setState({ isAnswersDisabled: true });
-    }, TIME_LIMIT);
-  }
-
-  render() {
-    const { counter } = this.state;
-
-    return (
-      <section>
-        <br />
-        Tempo:
-        <h2>{counter < 0 ? '0' : counter}</h2>
-      </section>
-    );
-  }
+  return (
+    <section>
+      <br />
+      Tempo:
+      <h2>{timer < 0 ? '0' : timer}</h2>
+    </section>
+  );
 }
 
 export default Timer;
