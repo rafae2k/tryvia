@@ -9,6 +9,7 @@ import { setScore } from '../../redux/actions/playerActions';
 // Components
 import Header from '../../components/Header';
 import QuestionCard from '../../components/QuestionCard';
+import Timer from '../../components/Timer';
 
 class Game extends Component {
   state = {
@@ -17,6 +18,7 @@ class Game extends Component {
     showNextQuestion: false,
     userAnswer: undefined,
     userClicked: false,
+    isTimerEnabled: false,
   }
 
   componentDidMount() {
@@ -43,6 +45,7 @@ class Game extends Component {
       isAnswersDisabled: true,
       showNextQuestion: true,
       userClicked: true,
+      isTimerEnabled: false,
     });
   }
 
@@ -56,8 +59,27 @@ class Game extends Component {
       questionNumber: prevState.questionNumber + 1,
       isAnswersDisabled: false,
       userClicked: false,
+      initiateTimer: true,
     }));
   };
+
+  startTimer = () => {
+    this.setState((prevState) => ({ ...prevState, isTimerEnabled: true }));
+  }
+
+  getTimeLeft = (timeLeft) => {
+    this.setState((prevState) => ({
+      ...prevState,
+      AnswerTimerLeft: timeLeft,
+    }));
+  }
+
+  setTimeOver = () => {
+    this.setState((prevState) => ({
+      ...prevState,
+      isAnswersDisabled: true,
+    }));
+  }
 
   render() {
     const { questions } = this.props;
@@ -67,20 +89,27 @@ class Game extends Component {
       showNextQuestion,
       userAnswer,
       userClicked,
+      isTimerEnabled,
     } = this.state;
 
     return (
       <>
         <Header />
-
-        { questions.length > 0
-        && <QuestionCard
+        <Timer
+          getTimeLeft={ this.getTimeLeft }
+          isTimerEnabled={ isTimerEnabled }
+          setTimeOver={ this.setTimeOver }
+        />
+        { (questions.length > 0)
+        && (<QuestionCard
           question={ questions[questionNumber] }
           handleUserAnswer={ this.handleUserAnswer }
           isAnswersDisabled={ isAnswersDisabled }
           userAnswer={ userAnswer }
           userClicked={ userClicked }
-        />}
+          startTimer={ this.startTimer }
+        />)}
+
         {showNextQuestion
           && (
             <button
