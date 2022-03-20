@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
+// Redux
 import { connect } from 'react-redux';
 import { addPlayer } from '../../redux/actions/playerActions';
 import { setTriviaToken } from '../../redux/actions/tokenActions';
-import { saveTokenOnLocalStorage } from '../../services/localStorage.service';
+
+// Services / Utils
 import fetchTriviaToken from '../../utils/fetchTriviaToken';
+import { saveTokenOnLocalStorage } from '../../services/localStorage.service';
+
+// Components
+import Input from '../../components/Input';
+import Logo from '../../components/Logo';
+
+// Styles
+import { Container, LogoWrapper, FormWrapper } from './styles';
 
 class Login extends Component {
   state ={
@@ -49,8 +60,44 @@ class Login extends Component {
     const { history } = this.props;
 
     return (
-      <div>
-        <form onSubmit={ this.handleSubmit }>
+      <Container>
+
+        <LogoWrapper>
+          <Logo />
+        </LogoWrapper>
+
+        <img src="../assets/images/question-markpng.png" alt="" />
+
+        <FormWrapper>
+          <div className="form-border">
+            <div className="form-content">
+              <h1>Let's Play <span>🤩</span></h1>
+              <Input
+                data-testid="input-player-name"
+                name="name"
+                id="name"
+                onChange={ this.handleChange }
+                value={ name }
+              />
+              <Input
+                data-testid="input-player-name"
+                name="email"
+                id="email"
+                onChange={ this.handleChange }
+                value={ email }
+              />
+              <Input
+                data-testid="input-player-name"
+                name="email"
+                id="email"
+                onChange={ this.handleChange }
+                value={ email }
+              />
+            </div>
+          </div>
+        </FormWrapper>
+
+        {/* <form onSubmit={ this.handleSubmit }>
           <input
             data-testid="input-player-name"
             placeholder="Nome"
@@ -80,8 +127,9 @@ class Login extends Component {
           >
             Configurations
           </button>
-        </form>
-      </div>
+        </form> */}
+
+      </Container>
 
     );
   }
