@@ -3,19 +3,42 @@ import styled from 'styled-components';
 export const Container = styled.header`
   display: flex;
   justify-content: space-between;
-  margin: 20px ;
+  align-items: center;
 
   img {
-    border-radius: 50%;
+    width: 14rem;
+    height: 7rem;
   }
 
-  div {
-    text-align: start;
+  nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    p > span {
-      margin-left: 5px;
+    img {
+      width: 7rem;
+      height: 7rem;
+      border-radius: 9999999px;
+      padding-left: 1rem;
     }
+
+    div {
+      text-align: start;
+      font-weight: 600;
+      font-size: x-large;
+      color: white;
+
+      p > span {
+        margin-left: 5px;
+      }
+    }
+  }
+
+  .react-switch-bg > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `;
 
-export const Export = styled.div``;
+export const none = styled.div``;
