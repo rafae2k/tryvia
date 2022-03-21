@@ -2,8 +2,14 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
 
+// Services/utils
+import decodeHtml from '../../utils/decodeHtml';
+
+// Components
+import Timer from '../Timer';
+
 // Styles
-import { QuestionContainer, AnswersContainer, Button } from './styles';
+import { Container, QuestionContainer, AnswersContainer, Button } from './styles';
 
 const QuestionCard = ({
   question: triviaQuestion,
@@ -11,6 +17,11 @@ const QuestionCard = ({
   isAnswersDisabled,
   userClicked,
   startTimer,
+  getTimeLeft,
+  isTimerEnabled,
+  setTimeOver,
+  resetTimer,
+  setResetTimer,
 }) => {
   useEffect(() => {
     startTimer();
@@ -48,20 +59,32 @@ const QuestionCard = ({
 
   // Return the answers buttons based on randomizeAnswers array
   return (
-    <QuestionContainer>
-      <h2
-        data-testid="question-category"
-        dangerouslySetInnerHTML={ { __html: category } }
-      />
+    <Container>
+      <QuestionContainer>
+        <div className="question-border">
+          <div className="question-content">
+            <h1
+              data-testid="question-category"
+              dangerouslySetInnerHTML={ { __html: category } }
+            />
+            <h2
+              data-testid="question-text"
+              // dangerouslySetInnerHTML solves the problem of strange html characters
+              // but in this specific one element whe face some tests problems
+              dangerouslySetInnerHTML={ { __html: question } }
+            />
 
-      <h3
-        data-testid="question-text"
-        // dangerouslySetInnerHTML solves the problem of strange html characters
-        // but in this specific one element whe face some tests problems
-        // dangerouslySetInnerHTML={ { __html: question } }
-      >
-        {question}
-      </h3>
+            <Timer
+              getTimeLeft={ getTimeLeft }
+              isTimerEnabled={ isTimerEnabled }
+              setTimeOver={ setTimeOver }
+              resetTimer={ resetTimer }
+              setResetTimer={ setResetTimer }
+            />
+          </div>
+        </div>
+
+      </QuestionContainer>
       <AnswersContainer data-testid="answer-options">
         {randomizeAnswers.map((quiz, index) => (
           (correctAnswer === quiz)
@@ -91,7 +114,7 @@ const QuestionCard = ({
             )
         ))}
       </AnswersContainer>
-    </QuestionContainer>
+    </Container>
   );
 };
 
