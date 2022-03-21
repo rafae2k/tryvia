@@ -13,7 +13,7 @@ position: relative;
     height: 9rem;
     width: 10rem;
     top: 13rem;
-    right: 8rem;
+    right: 27rem;
     transform: rotate(15deg);
   }
 `;

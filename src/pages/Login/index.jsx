@@ -11,8 +11,9 @@ import fetchTriviaToken from '../../utils/fetchTriviaToken';
 import { saveTokenOnLocalStorage } from '../../services/localStorage.service';
 
 // Components
-import Input from '../../components/Input';
 import Logo from '../../components/Logo';
+import Input from '../../components/Input';
+import Button from '../../components/Button';
 
 // Styles
 import { Container, LogoWrapper, FormWrapper } from './styles';
@@ -70,8 +71,11 @@ class Login extends Component {
 
         <FormWrapper>
           <div className="form-border">
-            <div className="form-content">
-              <h1>Let's Play <span>🤩</span></h1>
+            <form onSubmit={ this.handleSubmit } className="form-content">
+              <h1>
+                Let&apos;s Play !
+                <span>{' '}🤩</span>
+              </h1>
               <Input
                 data-testid="input-player-name"
                 name="name"
@@ -86,49 +90,16 @@ class Login extends Component {
                 onChange={ this.handleChange }
                 value={ email }
               />
-              <Input
-                data-testid="input-player-name"
-                name="email"
-                id="email"
-                onChange={ this.handleChange }
-                value={ email }
-              />
-            </div>
+              <Button
+                dataTestId="btn-play"
+                type="submit"
+                disabled={ isDisabled }
+              >
+                Play
+              </Button>
+            </form>
           </div>
         </FormWrapper>
-
-        {/* <form onSubmit={ this.handleSubmit }>
-          <input
-            data-testid="input-player-name"
-            placeholder="Nome"
-            name="name"
-            onChange={ this.handleChange }
-            value={ name }
-          />
-          <input
-            data-testid="input-gravatar-email"
-            type="email"
-            name="email"
-            placeholder="Email"
-            onChange={ this.handleChange }
-            value={ email }
-          />
-          <button
-            data-testid="btn-play"
-            type="submit"
-            disabled={ isDisabled }
-          >
-            Play
-          </button>
-          <button
-            data-testid="btn-settings"
-            type="button"
-            onClick={ () => history.push('/configurations') }
-          >
-            Configurations
-          </button>
-        </form> */}
-
       </Container>
 
     );
