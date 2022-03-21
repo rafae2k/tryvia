@@ -11,6 +11,9 @@ import Header from '../../components/Header';
 import QuestionCard from '../../components/QuestionCard';
 import Timer from '../../components/Timer';
 
+//Styles
+import { Container } from './styles';
+
 class Game extends Component {
   state = {
     questionNumber: 0,
@@ -103,15 +106,8 @@ class Game extends Component {
     } = this.state;
 
     return (
-      <>
+      <Container>
         <Header />
-        <Timer
-          getTimeLeft={ this.getTimeLeft }
-          isTimerEnabled={ isTimerEnabled }
-          setTimeOver={ this.setTimeOver }
-          resetTimer={ resetTimer }
-          setResetTimer={ this.setResetTimer }
-        />
         { (questions.length > 0)
         && (<QuestionCard
           question={ questions[questionNumber] }
@@ -120,6 +116,11 @@ class Game extends Component {
           userAnswer={ userAnswer }
           userClicked={ userClicked }
           startTimer={ this.startTimer }
+          getTimeLeft={ this.getTimeLeft }
+          isTimerEnabled={ isTimerEnabled }
+          setTimeOver={ this.setTimeOver }
+          resetTimer={ resetTimer }
+          setResetTimer={ this.setResetTimer }
         />)}
 
         {showNextQuestion
@@ -132,7 +133,7 @@ class Game extends Component {
               Next
             </button>
           )}
-      </>
+      </Container>
     );
   }
 }
